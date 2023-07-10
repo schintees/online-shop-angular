@@ -1,0 +1,5 @@
+<!-- <button class="btn" [style.color]="color" (click)='onClick.emit()'><i class="fa fa-{{type}}"></i></button> -->
+
+<button mat-icon-button [color]="color" (click)="onClick.emit()">
+  <mat-icon>{{ type }}</mat-icon>
+</button>

@@ -1,0 +1,22 @@
+.product-header {
+  display: flex;
+  align-items: center; 
+
+  .product-actions{
+    margin-left: auto;
+  }
+}
+
+.product-content{
+  display: flex; 
+  align-items: center;
+
+  td {
+    &:first-child{
+      color: grey;
+      text-align: right;
+    }
+    padding: 12px 20px 12px;
+  }
+}
+

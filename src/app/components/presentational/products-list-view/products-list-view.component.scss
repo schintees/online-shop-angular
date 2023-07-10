@@ -1,0 +1,30 @@
+.products-header {
+    display: flex;
+    align-items: center; 
+    padding-bottom: 10%;
+  
+    .products-actions{
+      margin-left: auto;
+    }
+  }
+
+  table {
+    border-style: solid;
+  }
+
+  tr {
+    &:first-child{
+      font-weight: bold;
+    }
+  }
+  
+  td {
+    padding: 10px 60px 10px 5px;
+    border: 1px solid black;
+  }
+
+  .td-btn {
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
