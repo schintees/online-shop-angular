@@ -1,0 +1,42 @@
+<div class="cart-header">
+  <h1>Shopping Cart</h1>
+  <button mat-flat-button color="primary" (click)="onCheckout.emit()">
+    CHECKOUT
+  </button>
+</div>
+<div *ngIf="cartProducts">
+  <table>
+    <tr>
+      <td>Category</td>
+      <td>Product Name</td>
+      <td>Price</td>
+      <td>Quantity</td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let cartProduct of cartProducts">
+      <td>{{ cartProduct.product.category }}</td>
+      <td>{{ cartProduct.product.name }}</td>
+      <td>{{ cartProduct.product.price }} RON</td>
+      <td class="td-btn">
+        <app-icon-button
+          [type]="'arrow_upward'"
+          [color]="'primary'"
+          (onClick)="onQuantityIncrease.emit()"
+        ></app-icon-button>
+        {{ cartProduct.quantity }}
+        <app-icon-button
+          [type]="'arrow_downward'"
+          [color]="'primary'"
+          (onClick)="onQuantityDecrease.emit()"
+        ></app-icon-button>
+      </td>
+      <td class="td-btn">
+        <app-icon-button
+          [type]="'close'"
+          [color]="'warn'"
+          (onClick)="onDeleteFromCart.emit(cartProduct.product.id)"
+        ></app-icon-button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,37 @@
+<div *ngIf="products">
+  <div class="products-header">
+    <h1>Products</h1>
+    <div class="products-actions">
+      <app-icon-button
+        [type]="'add_shopping_cart'"
+        [color]="'primary'"
+        (onClick)="onAddToCart.emit()"
+      ></app-icon-button>
+      <app-icon-button
+        [type]="'add'"
+        [color]="'primary'"
+        (onClick)="onCreateProduct.emit()"
+      ></app-icon-button>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>Category</td>
+      <td>Product Name</td>
+      <td>Price</td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{ product.category }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }} RON</td>
+      <td class="td-btn">
+        <app-icon-button
+          [type]="'keyboard_arrow_right'"
+          [color]="'accent'"
+          (onClick)="onProductClick.emit()"
+        ></app-icon-button>
+      </td>
+    </tr>
+  </table>
+</div>

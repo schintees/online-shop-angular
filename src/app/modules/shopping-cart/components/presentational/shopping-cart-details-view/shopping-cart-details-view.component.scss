@@ -1,0 +1,13 @@
+@use "../../../../../../styles/mixins.scss" as mixins;
+
+@include mixins.items-table;
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10%;
+
+  button {
+    margin-left: auto;
+  }
+}
