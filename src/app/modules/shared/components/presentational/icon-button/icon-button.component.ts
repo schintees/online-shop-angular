@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [CommonModule, MatButtonModule,
     MatIconModule],
   templateUrl: './icon-button.component.html',
-  styleUrls: ['./icon-button.component.scss']
+  styleUrls: []
 })
 export class IconButtonComponent {
   @Input() type: String = '';
