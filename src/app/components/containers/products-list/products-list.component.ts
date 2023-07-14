@@ -1,18 +1,32 @@
-import { Component } from '@angular/core';
-import { PRODUCTS } from 'src/app/mocks/products.mocks';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/shared/types/products.types';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: []
 })
-export class ProductsListComponent {
-  products: Product[] = PRODUCTS;
+export class ProductsListComponent implements OnInit {
+  products$?: Observable<Product[]>;
 
-  onAddToCart() {
-    // TODO
-    console.log("onAddToCart");
+  constructor(
+    private router: Router,
+    private productService: ProductService
+  ) { }
+
+  ngOnInit() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.products$ = this.productService.getAllProducts();
+  }
+
+  onClickCart() {
+    this.router.navigate(["/shopping-cart"]);
   }
 
   onCreateProduct() {
@@ -20,8 +34,7 @@ export class ProductsListComponent {
     console.log("onCreateProduct");
   }
 
-  onProductClick() {
-    // TODO
-    console.log("onProductClick");
+  onProductClick(productId: string) {
+    this.router.navigate(["/products", productId]);
   }
 }

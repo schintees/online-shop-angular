@@ -14,6 +14,9 @@ import { ConfirmDeleteDialogViewComponent } from './components/presentational/co
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDeleteDialogComponent } from './components/containers/confirm-delete-dialog/confirm-delete-dialog.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { GlobalHttpInterceptorService } from './services/global-http-interceptor.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -25,7 +28,11 @@ import { ConfirmDeleteDialogComponent } from './components/containers/confirm-de
         ConfirmDeleteDialogViewComponent,
         ConfirmDeleteDialogComponent
     ],
-    providers: [],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: GlobalHttpInterceptorService,
+        multi: true
+    }],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -34,7 +41,9 @@ import { ConfirmDeleteDialogComponent } from './components/containers/confirm-de
         BrowserAnimationsModule,
         IconButtonComponent,
         MatDialogModule,
-        MatButtonModule
+        MatButtonModule,
+        HttpClientModule,
+        MatSnackBarModule
     ]
 })
 export class AppModule { }

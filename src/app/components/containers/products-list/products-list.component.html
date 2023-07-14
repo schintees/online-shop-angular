@@ -1,6 +1,6 @@
 <app-products-list-view
-  [products]="products"
-  (onAddToCart)="onAddToCart()"
+  [products]="(products$ | async) || []"
+  (onClickCart)="onClickCart()"
   (onCreateProduct)="onCreateProduct()"
-  (onProductClick)="onProductClick()"
+  (onProductClick)="onProductClick($event)"
 ></app-products-list-view>

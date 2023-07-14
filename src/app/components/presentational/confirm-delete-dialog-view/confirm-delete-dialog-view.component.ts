@@ -9,6 +9,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ConfirmDeleteDialogViewComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { productId: string, productName: string }) { }
 
-  @Output() onConfirm: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onConfirm: EventEmitter<string> = new EventEmitter<string>();
 
 }

@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CartService } from 'src/app/modules/shopping-cart/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-confirm-delete-dialog',
@@ -7,11 +11,21 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: []
 })
 export class ConfirmDeleteDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { productId: string, productName: string }) { }
+  constructor(
+    private productService: ProductService,
+    private snackBarService: SnackbarService,
+    private cartService: CartService,
+    private router: Router,
+    private dialogRef: MatDialogRef<ConfirmDeleteDialogComponent>
+  ) { }
 
-  onConfirm() {
-    // TODO: delete product
-
-    console.log("delete product confirmation");
+  onConfirm(id: string) {
+    this.productService.deleteProduct(id)
+      .subscribe(() => {
+        this.cartService.deleteProductFromCart(id);
+        this.dialogRef.close();
+        this.router.navigate(["/products"]);
+        this.snackBarService.openSuccessMessageBar("The product has been deleted successfully");
+      });
   }
 }

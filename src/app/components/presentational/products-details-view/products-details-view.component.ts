@@ -11,5 +11,6 @@ export class ProductsDetailsViewComponent {
 
   @Output() onEdit: EventEmitter<void> = new EventEmitter<void>;
   @Output() onDelete: EventEmitter<void> = new EventEmitter<void>;
+  @Output() onAddToCart: EventEmitter<void> = new EventEmitter<void>;
 
 }
