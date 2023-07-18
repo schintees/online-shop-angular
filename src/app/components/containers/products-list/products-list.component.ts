@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/shared/types/products.types';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
   products$?: Observable<Product[]>;
 
   constructor(
-    private router: Router,
+    private navigationService: NavigationService,
     private productService: ProductService
   ) { }
 
@@ -26,7 +26,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   onClickCart() {
-    this.router.navigate(["/shopping-cart"]);
+    this.navigationService.navigateToShoppingCartPage();
   }
 
   onCreateProduct() {
@@ -35,6 +35,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   onProductClick(productId: string) {
-    this.router.navigate(["/products", productId]);
+    this.navigationService.navigateToProductDetailsPage(productId);
   }
 }

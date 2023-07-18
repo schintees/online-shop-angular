@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/modules/shopping-cart/services/cart.service';
 import { Observable } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { Messages } from 'src/app/modules/shared/types/messages.const';
 
 @Component({
   selector: 'app-products-details',
@@ -47,7 +48,7 @@ export class ProductsDetailsComponent implements OnInit {
 
   onAddToCart(product: Product) {
     this.cartService.addProductToCart(product);
-    this.snackBarService.openSuccessMessageBar("The product has been successfully added to the cart")
+    this.snackBarService.openSuccessMessageBar(Messages.cart.productAddedSuccessfully)
   }
 
 }
