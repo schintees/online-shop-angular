@@ -1,12 +1,12 @@
   <div class="products-header">
     <h1>Products</h1>
     <div class="products-actions">
-      <app-icon-button
+      <app-icon-button *ngIf="isCustomer"
         [type]="'shopping_cart'"
         [color]="'primary'"
         (onClick)="onClickCart.emit()"
       ></app-icon-button>
-      <app-icon-button
+      <app-icon-button *ngIf="isAdmin"
         [type]="'add'"
         [color]="'primary'"
         (onClick)="onCreateProduct.emit()"

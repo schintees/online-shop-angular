@@ -20,3 +20,32 @@
         vertical-align: middle;
     }
 }
+
+@mixin mat-form {
+    :host {
+        display: flex;
+        justify-content: center;
+        margin: 100px 0px;
+    }
+
+    mat-form-field {
+        width: 100%;
+        min-width: 300px;
+    }
+
+    mat-card-title,
+    mat-card-content {
+        display: flex;
+        justify-content: center;
+    }
+
+    mat-card-title {
+        padding: 2% 0;
+        font-size: 30px;
+    }
+
+    .button {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
