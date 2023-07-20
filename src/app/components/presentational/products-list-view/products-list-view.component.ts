@@ -7,10 +7,10 @@ import { Product } from 'src/app/modules/shared/types/products.types';
   styleUrls: ['./products-list-view.component.scss']
 })
 export class ProductsListViewComponent {
-  @Input() products?: Product[];
+  @Input() products: Product[] = [];
 
-  @Output() onAddToCart: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onClickCart: EventEmitter<void> = new EventEmitter<void>();
   @Output() onCreateProduct: EventEmitter<void> = new EventEmitter<void>();
-  @Output() onProductClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onProductClick: EventEmitter<string> = new EventEmitter<string>();
 
 }

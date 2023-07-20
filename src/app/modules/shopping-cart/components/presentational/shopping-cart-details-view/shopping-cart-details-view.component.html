@@ -21,13 +21,13 @@
         <app-icon-button
           [type]="'arrow_upward'"
           [color]="'primary'"
-          (onClick)="onQuantityIncrease.emit()"
+          (onClick)="onQuantityIncrease.emit(cartProduct.product.id)"
         ></app-icon-button>
         {{ cartProduct.quantity }}
         <app-icon-button
           [type]="'arrow_downward'"
           [color]="'primary'"
-          (onClick)="onQuantityDecrease.emit()"
+          (onClick)="onQuantityDecrease.emit(cartProduct.product.id)"
         ></app-icon-button>
       </td>
       <td class="td-btn">

@@ -1,11 +1,10 @@
-<div *ngIf="products">
   <div class="products-header">
     <h1>Products</h1>
     <div class="products-actions">
       <app-icon-button
-        [type]="'add_shopping_cart'"
+        [type]="'shopping_cart'"
         [color]="'primary'"
-        (onClick)="onAddToCart.emit()"
+        (onClick)="onClickCart.emit()"
       ></app-icon-button>
       <app-icon-button
         [type]="'add'"
@@ -29,9 +28,8 @@
         <app-icon-button
           [type]="'keyboard_arrow_right'"
           [color]="'accent'"
-          (onClick)="onProductClick.emit()"
+          (onClick)="onProductClick.emit(product.id)"
         ></app-icon-button>
       </td>
     </tr>
   </table>
-</div>

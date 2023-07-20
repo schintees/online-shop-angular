@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartProduct } from '../../../types/cart.products.types';
-import { Product } from 'src/app/modules/shared/types/products.types';
 
 @Component({
   selector: 'app-shopping-cart-details-view',
@@ -10,8 +9,8 @@ import { Product } from 'src/app/modules/shared/types/products.types';
 export class ShoppingCartDetailsViewComponent {
   @Input() cartProducts?: CartProduct[];
 
-  @Output() onQuantityIncrease: EventEmitter<void> = new EventEmitter<void>();
-  @Output() onQuantityDecrease: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onQuantityIncrease: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onQuantityDecrease: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() onDeleteFromCart: EventEmitter<string> = new EventEmitter<string>();
   @Output() onCheckout: EventEmitter<void> = new EventEmitter<void>();

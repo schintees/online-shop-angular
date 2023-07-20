@@ -3,6 +3,11 @@
     <h1>Product: {{ product.name }}</h1>
     <div class="product-actions">
       <app-icon-button
+        [type]="'add_shopping_cart'"
+        [color]="'primary'"
+        (onClick)="onAddToCart.emit()"
+      ></app-icon-button>
+      <app-icon-button
         [type]="'open_in_new'"
         [color]="'primary'"
         (onClick)="onEdit.emit()"
