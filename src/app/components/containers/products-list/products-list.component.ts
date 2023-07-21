@@ -36,7 +36,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   onCreateProduct() {
-    this.navigationService.navigateToAddProducttPage();
+    this.navigationService.navigateToAddProductPage();
   }
 
   onProductClick(productId: string) {

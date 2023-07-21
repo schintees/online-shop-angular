@@ -1,6 +1,6 @@
 <app-user-navigation-view
-  [username]="(username$ | async) || undefined"
-  [isAdmin]="(isAdmin$ | async) || undefined"
+  [username]="(username$ | async)!"
+  [isAdmin]="(isAdmin$ | async) || false"
   (onLogout)="onLogout()"
   (onLogin)="onLogin()"
   (onHome)="onHome()"

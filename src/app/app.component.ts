@@ -7,9 +7,4 @@ import { Component, HostListener, OnDestroy } from '@angular/core';
 })
 export class AppComponent {
   title = 'online-shop-angular';
-
-  @HostListener("window:beforeunload")
-  clearLocalStorage() {
-    localStorage.clear();
-  }
 }

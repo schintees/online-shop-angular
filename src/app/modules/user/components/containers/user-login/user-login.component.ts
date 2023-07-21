@@ -6,6 +6,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { Messages } from 'src/app/modules/shared/types/messages.const';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
@@ -36,14 +37,14 @@ export class UserLoginComponent implements OnInit {
     }
     this.userService.login(this.loginForm.value)
       .pipe(untilDestroyed(this))
-      .pipe(catchError(error => this.catchAuthError(error)))
+      .pipe(catchError((error: HttpErrorResponse) => this.catchAuthError(error)))
       .subscribe(() => {
         this.navigationService.navigateToProductsPage()
       });
 
   }
 
-  catchAuthError(error: any): Observable<any> {
+  catchAuthError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     if (error && error.error && error.error.message) {
       this.snackBarService.openErrorMessageBar(Messages.login.wrongCredentials)
     } else {

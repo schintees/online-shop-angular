@@ -36,7 +36,7 @@ export class UserNavigationComponent implements OnInit {
   }
 
   onAddProduct() {
-    this.navigationService.navigateToAddProducttPage();
+    this.navigationService.navigateToAddProductPage();
   }
 
 }

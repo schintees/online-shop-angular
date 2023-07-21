@@ -21,7 +21,7 @@ export class NavigationService {
     this.router.navigate([`/products/${productId}/edit`]);
   }
 
-  navigateToAddProducttPage() {
+  navigateToAddProductPage() {
     this.router.navigate([NavigationRoutes.AddProduct]);
   }
 

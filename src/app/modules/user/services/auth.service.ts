@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.getToken() ? true : false;
+    return !!this.getToken();
   }
 
   getUsername(): Observable<string> {
