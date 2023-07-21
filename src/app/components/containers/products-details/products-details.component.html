@@ -1,8 +1,10 @@
 <div *ngIf="product$ | async as product">
   <app-products-details-view
     [product]="product"
+    [isAdmin]="(isAdmin$ | async) || false"
+    [isCustomer]="(isCustomer$ | async) || false"
     (onDelete)="onDelete(product.id, product.name)"
-    (onEdit)="onEdit()"
+    (onEdit)="onEdit(product.id)"
     (onAddToCart)="onAddToCart(product)"
   ></app-products-details-view>
 </div>

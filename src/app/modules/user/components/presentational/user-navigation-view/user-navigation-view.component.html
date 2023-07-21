@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <span>Online Shop</span>
+  <div class="user-actions">
+    <div *ngIf="username" class="login-actions">
+      <span>Hi, {{ username }}!</span>
+      <button mat-button (click)="onLogout.emit()">Logout</button>
+    </div>
+    <div *ngIf="!username" class="login-actions">
+      <button mat-button (click)="onLogin.emit()">Login</button>
+    </div>
+    <button mat-button (click)="onHome.emit()">Home</button>
+    <button *ngIf="isAdmin" mat-button (click)="onAddProduct.emit()">Add product</button>
+  </div>
+</mat-toolbar>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/shared/types/products.types';
+import { AuthService } from 'src/app/modules/user/services/auth.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,10 +12,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsListComponent implements OnInit {
   products$?: Observable<Product[]>;
+  isAdmin$?: Observable<boolean>;
+  isCustomer$?: Observable<boolean>;
 
   constructor(
     private navigationService: NavigationService,
-    private productService: ProductService
+    private productService: ProductService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -22,6 +26,8 @@ export class ProductsListComponent implements OnInit {
   }
 
   getProducts() {
+    this.isAdmin$ = this.authService.isAdmin();
+    this.isCustomer$ = this.authService.isCustomer();
     this.products$ = this.productService.getAllProducts();
   }
 
@@ -30,8 +36,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   onCreateProduct() {
-    // TODO
-    console.log("onCreateProduct");
+    this.navigationService.navigateToAddProductPage();
   }
 
   onProductClick(productId: string) {

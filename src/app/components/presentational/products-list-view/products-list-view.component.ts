@@ -8,6 +8,8 @@ import { Product } from 'src/app/modules/shared/types/products.types';
 })
 export class ProductsListViewComponent {
   @Input() products: Product[] = [];
+  @Input() isAdmin?: boolean;
+  @Input() isCustomer?: boolean;
 
   @Output() onClickCart: EventEmitter<void> = new EventEmitter<void>();
   @Output() onCreateProduct: EventEmitter<void> = new EventEmitter<void>();

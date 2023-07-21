@@ -1,5 +1,8 @@
 export enum NavigationRoutes {
     Products = "products",
     ProductDetails = "products/:id",
-    ShoppingCart = "shopping-cart"
+    EditProduct = "products/:id/edit",
+    AddProduct = "products/add",
+    ShoppingCart = "shopping-cart",
+    Login = "login"
 }

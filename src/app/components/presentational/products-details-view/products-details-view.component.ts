@@ -8,6 +8,8 @@ import { Product } from 'src/app/modules/shared/types/products.types';
 })
 export class ProductsDetailsViewComponent {
   @Input() product?: Product;
+  @Input() isAdmin?: boolean;
+  @Input() isCustomer?: boolean;
 
   @Output() onEdit: EventEmitter<void> = new EventEmitter<void>;
   @Output() onDelete: EventEmitter<void> = new EventEmitter<void>;

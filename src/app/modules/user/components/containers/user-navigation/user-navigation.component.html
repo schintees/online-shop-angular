@@ -1,0 +1,8 @@
+<app-user-navigation-view
+  [username]="(username$ | async)!"
+  [isAdmin]="(isAdmin$ | async) || false"
+  (onLogout)="onLogout()"
+  (onLogin)="onLogin()"
+  (onHome)="onHome()"
+  (onAddProduct)="onAddProduct()"
+></app-user-navigation-view>

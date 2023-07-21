@@ -3,16 +3,19 @@
     <h1>Product: {{ product.name }}</h1>
     <div class="product-actions">
       <app-icon-button
+        *ngIf="isCustomer"
         [type]="'add_shopping_cart'"
         [color]="'primary'"
         (onClick)="onAddToCart.emit()"
       ></app-icon-button>
       <app-icon-button
+        *ngIf="isAdmin"
         [type]="'open_in_new'"
         [color]="'primary'"
         (onClick)="onEdit.emit()"
       ></app-icon-button>
       <app-icon-button
+        *ngIf="isAdmin"
         [type]="'delete'"
         [color]="'warn'"
         (onClick)="onDelete.emit()"

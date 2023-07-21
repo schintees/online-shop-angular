@@ -17,8 +17,20 @@ export class NavigationService {
     this.router.navigate([NavigationRoutes.Products, productId]);
   }
 
+  navigateToEditProducttPage(productId: string) {
+    this.router.navigate([`/products/${productId}/edit`]);
+  }
+
+  navigateToAddProductPage() {
+    this.router.navigate([NavigationRoutes.AddProduct]);
+  }
+
   navigateToShoppingCartPage() {
     this.router.navigate([NavigationRoutes.ShoppingCart]);
+  }
+
+  navigateToLoginPage() {
+    this.router.navigate([NavigationRoutes.Login])
   }
 
 }

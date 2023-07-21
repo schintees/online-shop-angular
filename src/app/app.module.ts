@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { HostListener, NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +15,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDeleteDialogComponent } from './components/containers/confirm-delete-dialog/confirm-delete-dialog.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { GlobalHttpInterceptorService } from './services/global-http-interceptor.service';
+import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductsFormViewComponent } from './components/presentational/products-form-view/products-form-view.component';
+import { MatInputModule } from '@angular/material/input';
+import { ProductsFormComponent } from './components/containers/products-form/products-form.component';
+import { MatCardModule } from '@angular/material/card';
+import { UserModule } from './modules/user/user.module';
 
 @NgModule({
     declarations: [
@@ -26,11 +32,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         ProductsListComponent,
         ProductsListViewComponent,
         ConfirmDeleteDialogViewComponent,
-        ConfirmDeleteDialogComponent
+        ConfirmDeleteDialogComponent,
+        ProductsFormComponent,
+        ProductsFormViewComponent
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
-        useClass: GlobalHttpInterceptorService,
+        useClass: ErrorInterceptor,
         multi: true
     }],
     bootstrap: [AppComponent],
@@ -38,12 +46,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         BrowserModule,
         AppRoutingModule,
         ShoppingCartModule,
+        UserModule,
         BrowserAnimationsModule,
         IconButtonComponent,
         MatDialogModule,
         MatButtonModule,
         HttpClientModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
     ]
 })
 export class AppModule { }
