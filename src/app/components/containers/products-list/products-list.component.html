@@ -2,6 +2,7 @@
   [products]="(products$ | async) || []"
   [isAdmin]="(isAdmin$ | async) || false"
   [isCustomer]="(isCustomer$ | async) || false"
+  [isLoading]="(isLoading$ | async) || false"
   (onClickCart)="onClickCart()"
   (onCreateProduct)="onCreateProduct()"
   (onProductClick)="onProductClick($event)"

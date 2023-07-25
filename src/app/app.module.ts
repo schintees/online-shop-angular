@@ -1,4 +1,4 @@
-import { HostListener, NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,13 @@ import { MatInputModule } from '@angular/material/input';
 import { ProductsFormComponent } from './components/containers/products-form/products-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { UserModule } from './modules/user/user.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { appMetaReducers, appReducers } from './state/app.reducers';
+import { appEffects } from './state/app.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
     declarations: [
@@ -57,6 +64,10 @@ import { UserModule } from './modules/user/user.module';
         ReactiveFormsModule,
         MatInputModule,
         MatCardModule,
+        MatProgressSpinnerModule,
+        StoreModule.forRoot(appReducers, appMetaReducers),
+        EffectsModule.forRoot(appEffects),
+        StoreDevtoolsModule.instrument(),
     ]
 })
 export class AppModule { }

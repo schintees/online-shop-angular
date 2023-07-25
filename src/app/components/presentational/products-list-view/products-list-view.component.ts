@@ -10,6 +10,7 @@ export class ProductsListViewComponent {
   @Input() products: Product[] = [];
   @Input() isAdmin?: boolean;
   @Input() isCustomer?: boolean;
+  @Input() isLoading?: boolean;
 
   @Output() onClickCart: EventEmitter<void> = new EventEmitter<void>();
   @Output() onCreateProduct: EventEmitter<void> = new EventEmitter<void>();

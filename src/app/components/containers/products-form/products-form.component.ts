@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Messages } from 'src/app/modules/shared/types/messages.const';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import { addProduct, loadProduct, updateProduct } from 'src/app/state/product/product.actions';
+import { selectProduct } from 'src/app/state/product/product.selectors';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { ProductService } from 'src/app/services/product.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @UntilDestroy()
 @Component({
@@ -22,8 +23,7 @@ export class ProductsFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private navigationService: NavigationService,
-    private productService: ProductService,
-    private snackBarService: SnackbarService
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
@@ -39,9 +39,10 @@ export class ProductsFormComponent implements OnInit {
     });
 
     if (!this.isAddMode) {
-      this.productService.getProduct(this.productId)
+      this.store.dispatch(loadProduct({ productId: this.productId }));
+      this.store.select(selectProduct)
         .pipe(untilDestroyed(this))
-        .subscribe(productResponse => this.productForm.patchValue(productResponse));
+        .subscribe(productResponse => this.productForm.patchValue(productResponse!));
     }
   }
 
@@ -58,20 +59,10 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private createProduct() {
-    this.productService.addProduct(this.productForm.value)
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.snackBarService.openSuccessMessageBar(Messages.product.createdSuccessfully);
-        this.navigationService.navigateToProductsPage()
-      });
+    this.store.dispatch(addProduct({ product: this.productForm.value }));
   }
 
   private updateProduct() {
-    this.productService.updateProduct({ ...this.productForm.value, id: this.productId })
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.snackBarService.openSuccessMessageBar(Messages.product.updatedSuccessfully);
-        this.navigationService.navigateToProductsPage()
-      });
+    this.store.dispatch(updateProduct({ product: { ...this.productForm.value, id: this.productId } }));
   }
 }

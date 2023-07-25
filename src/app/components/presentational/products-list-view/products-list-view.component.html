@@ -1,35 +1,40 @@
-  <div class="products-header">
-    <h1>Products</h1>
-    <div class="products-actions">
-      <app-icon-button *ngIf="isCustomer"
-        [type]="'shopping_cart'"
-        [color]="'primary'"
-        (onClick)="onClickCart.emit()"
-      ></app-icon-button>
-      <app-icon-button *ngIf="isAdmin"
-        [type]="'add'"
-        [color]="'primary'"
-        (onClick)="onCreateProduct.emit()"
-      ></app-icon-button>
-    </div>
+<div class="products-header">
+  <h1>Products</h1>
+  <div *ngIf="isLoading" class="spinner-wrapper">
+    <mat-spinner diameter="40"></mat-spinner>
   </div>
-  <table>
-    <tr>
-      <td>Category</td>
-      <td>Product Name</td>
-      <td>Price</td>
-      <td></td>
-    </tr>
-    <tr *ngFor="let product of products">
-      <td>{{ product.category }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }} RON</td>
-      <td class="td-btn">
-        <app-icon-button
-          [type]="'keyboard_arrow_right'"
-          [color]="'accent'"
-          (onClick)="onProductClick.emit(product.id)"
-        ></app-icon-button>
-      </td>
-    </tr>
-  </table>
+  <div class="products-actions">
+    <app-icon-button
+      *ngIf="isCustomer"
+      [type]="'shopping_cart'"
+      [color]="'primary'"
+      (onClick)="onClickCart.emit()"
+    ></app-icon-button>
+    <app-icon-button
+      *ngIf="isAdmin"
+      [type]="'add'"
+      [color]="'primary'"
+      (onClick)="onCreateProduct.emit()"
+    ></app-icon-button>
+  </div>
+</div>
+<table>
+  <tr>
+    <td>Category</td>
+    <td>Product Name</td>
+    <td>Price</td>
+    <td></td>
+  </tr>
+  <tr *ngFor="let product of products">
+    <td>{{ product.category }}</td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.price }} RON</td>
+    <td class="td-btn">
+      <app-icon-button
+        [type]="'keyboard_arrow_right'"
+        [color]="'accent'"
+        (onClick)="onProductClick.emit(product.id)"
+      ></app-icon-button>
+    </td>
+  </tr>
+</table>
