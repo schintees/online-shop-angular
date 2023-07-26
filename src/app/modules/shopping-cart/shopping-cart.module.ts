@@ -4,6 +4,7 @@ import { ShoppingCartDetailsComponent } from './components/containers/shopping-c
 import { ShoppingCartDetailsViewComponent } from './components/presentational/shopping-cart-details-view/shopping-cart-details-view.component';
 import { IconButtonComponent } from '../shared/components/presentational/icon-button/icon-button.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     IconButtonComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
   exports: [
     ShoppingCartDetailsComponent

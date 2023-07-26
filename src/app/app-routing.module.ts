@@ -9,6 +9,7 @@ import { UserLoginComponent } from './modules/user/components/containers/user-lo
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 import { customerGuard } from './guards/customer.guard';
+import { notAuthGuard } from './guards/not-auth.guard';
 
 const routes: Routes = [
   { path: NavigationRoutes.Products, component: ProductsListComponent, canActivate: [authGuard] },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: NavigationRoutes.EditProduct, component: ProductsFormComponent, canActivate: [adminGuard] },
   { path: NavigationRoutes.ProductDetails, component: ProductsDetailsComponent, canActivate: [authGuard] },
   { path: NavigationRoutes.ShoppingCart, component: ShoppingCartDetailsComponent, canActivate: [customerGuard] },
-  { path: NavigationRoutes.Login, component: UserLoginComponent },
+  { path: NavigationRoutes.Login, component: UserLoginComponent, canActivate: [notAuthGuard] },
   { path: '', redirectTo: NavigationRoutes.Products, pathMatch: 'full' },
 
 ];

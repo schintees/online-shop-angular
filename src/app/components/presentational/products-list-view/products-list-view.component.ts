@@ -16,4 +16,5 @@ export class ProductsListViewComponent {
   @Output() onCreateProduct: EventEmitter<void> = new EventEmitter<void>();
   @Output() onProductClick: EventEmitter<string> = new EventEmitter<string>();
 
+  displayedColumns: string[] = ['category', 'name', 'price', 'action'];
 }

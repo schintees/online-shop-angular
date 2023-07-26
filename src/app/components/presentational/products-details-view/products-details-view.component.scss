@@ -1,18 +1,13 @@
-.product-header {
+@use "../../../../styles/mixins.scss" as mixins;
+
+@include mixins.content-header-with-actions;
+
+.product-content {
   display: flex;
-  align-items: center; 
-
-  .product-actions{
-    margin-left: auto;
-  }
-}
-
-.product-content{
-  display: flex; 
   align-items: center;
 
   td {
-    &:first-child{
+    &:first-child {
       color: grey;
       text-align: right;
     }

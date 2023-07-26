@@ -1,16 +1,6 @@
 @use "../../../../styles/mixins.scss" as mixins;
 
-@include mixins.items-table;
-
-.products-header {
-  display: flex;
-  align-items: center;
-  padding-bottom: 10%;
-
-  .products-actions {
-    margin-left: auto;
-  }
-}
+@include mixins.content-header-with-actions;
 
 .spinner-wrapper {
   margin-left: 10%;

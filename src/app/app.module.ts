@@ -29,7 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { appMetaReducers, appReducers } from './state/app.reducers';
 import { appEffects } from './state/app.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
     declarations: [
@@ -65,6 +65,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatInputModule,
         MatCardModule,
         MatProgressSpinnerModule,
+        MatTableModule,
         StoreModule.forRoot(appReducers, appMetaReducers),
         EffectsModule.forRoot(appEffects),
         StoreDevtoolsModule.instrument(),
