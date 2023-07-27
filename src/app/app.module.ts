@@ -26,10 +26,16 @@ import { UserModule } from './modules/user/user.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { appMetaReducers, appReducers } from './state/app.reducers';
+import { appReducers } from './state/app.reducers';
 import { appEffects } from './state/app.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table'
+import { environment } from 'src/environments/environment';
+
+let devModules = [
+    StoreDevtoolsModule.instrument(),
+];
+
 
 @NgModule({
     declarations: [
@@ -66,9 +72,10 @@ import { MatTableModule } from '@angular/material/table'
         MatCardModule,
         MatProgressSpinnerModule,
         MatTableModule,
-        StoreModule.forRoot(appReducers, appMetaReducers),
+        StoreModule.forRoot(appReducers),
         EffectsModule.forRoot(appEffects),
-        StoreDevtoolsModule.instrument(),
+
+        !environment.production ? devModules : []
     ]
 })
 export class AppModule { }

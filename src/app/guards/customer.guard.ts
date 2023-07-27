@@ -1,9 +1,9 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { NavigationRoutes } from '../modules/shared/types/navigation.routes.enum';
-import { selectIsCustomer } from '../modules/user/state/user.selectors';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
+import { selectIsCustomer } from '../modules/user/state/user.reducers';
 
 export const customerGuard: CanActivateFn = () => {
   const store = inject(Store);

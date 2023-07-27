@@ -1,6 +1,7 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, createSelector, on } from "@ngrx/store";
 import { CartProduct } from "../types/cart.products.types";
 import { addProductToCart, createOrder, createOrderError, createOrderSuccess, decreaseProductQuantity, increaseProductQuantity, removeProductFromCart } from "./cart.actions";
+import { AppState } from "src/app/state/app.state";
 
 
 export interface ShoppingCartState {
@@ -14,6 +15,14 @@ const initialState: ShoppingCartState = {
     loading: false,
     error: undefined
 };
+
+export const selectShoppingCartState = (state: AppState) => state.shoppingCart;
+
+export const selectCartProducts = createSelector(
+    selectShoppingCartState,
+    (state: ShoppingCartState) => state.products
+);
+
 
 export const shoppingCartReducer = createReducer(
     initialState,
@@ -47,10 +56,12 @@ export const shoppingCartReducer = createReducer(
         return {
             ...state,
             products:
-                existingCartProduct ?
-                    state.products.map(
-                        cartProduct => cartProduct.product.id === product.id ? { ...cartProduct, quantity: cartProduct.quantity + 1 } : cartProduct) :
-                    [...state.products, { product: { ...product }, quantity: 1 }]
+                existingCartProduct
+                    ? state.products
+                        .filter(cartProduct => cartProduct.product.id !== product.id)
+                        .concat({ product: { ...product }, quantity: existingCartProduct.quantity + 1 })
+                    : state.products
+                        .concat({ product: { ...product }, quantity: 1 })
         }
     }),
 

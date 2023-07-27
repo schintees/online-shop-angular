@@ -10,9 +10,9 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { loadProduct } from 'src/app/state/product/product.actions';
-import { selectProduct } from 'src/app/state/product/product.selectors';
 import { addProductToCart } from 'src/app/modules/shopping-cart/state/cart.actions';
-import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.selectors';
+import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.reducers';
+import { selectProduct } from 'src/app/state/product/product.reducers';
 
 @Component({
   selector: 'app-products-details',
@@ -20,9 +20,9 @@ import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user
   styleUrls: []
 })
 export class ProductsDetailsComponent implements OnInit {
-  product$: Observable<Product | undefined> = this.store.select(selectProduct);
-  isAdmin$: Observable<boolean | undefined> = this.store.select(selectIsAdmin);
-  isCustomer$: Observable<boolean | undefined> = this.store.select(selectIsCustomer);
+  product$: Observable<Product | undefined> | undefined;
+  isAdmin$: Observable<boolean | undefined> | undefined;
+  isCustomer$: Observable<boolean | undefined> | undefined;
 
   constructor(
     private dialog: MatDialog,
@@ -33,6 +33,10 @@ export class ProductsDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.product$ = this.store.select(selectProduct);
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+    this.isCustomer$ = this.store.select(selectIsCustomer);
+
     this.getProduct();
   }
 

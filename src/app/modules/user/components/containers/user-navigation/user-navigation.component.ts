@@ -4,7 +4,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { logout } from '../../../state/user.actions';
-import { selectCurrentUsername, selectIsAdmin } from '../../../state/user.selectors';
+import { selectCurrentUsername, selectIsAdmin } from '../../../state/user.reducers';
 
 @Component({
   selector: 'app-user-navigation',
@@ -12,8 +12,8 @@ import { selectCurrentUsername, selectIsAdmin } from '../../../state/user.select
   styleUrls: []
 })
 export class UserNavigationComponent implements OnInit {
-  username$: Observable<string | undefined> = this.store.select(selectCurrentUsername);
-  isAdmin$: Observable<boolean | undefined> = this.store.select(selectIsAdmin);
+  username$: Observable<string | undefined> | undefined;
+  isAdmin$: Observable<boolean | undefined> | undefined;
 
   constructor(
     private store: Store<AppState>,
@@ -21,6 +21,8 @@ export class UserNavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.username$ = this.store.select(selectCurrentUsername);
+    this.isAdmin$ = this.store.select(selectIsAdmin);
   }
 
   onLogout() {

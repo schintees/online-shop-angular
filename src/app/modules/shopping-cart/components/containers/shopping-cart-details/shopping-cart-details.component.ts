@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { createOrder, decreaseProductQuantity, increaseProductQuantity, removeProductFromCart } from '../../../state/cart.actions';
 import { Observable } from 'rxjs';
-import { selectCartProducts } from '../../../state/cart.selectors';
+import { selectCartProducts } from '../../../state/cart.reducers';
 
 @Component({
   selector: 'app-shopping-cart-details',
@@ -15,7 +15,7 @@ import { selectCartProducts } from '../../../state/cart.selectors';
 })
 export class ShoppingCartDetailsComponent implements OnInit {
 
-  cartProducts$: Observable<CartProduct[]> = this.store.select(selectCartProducts);
+  cartProducts$: Observable<CartProduct[]> | undefined;
 
   constructor(
     private store: Store<AppState>,
@@ -23,6 +23,7 @@ export class ShoppingCartDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cartProducts$ = this.store.select(selectCartProducts);
   }
 
   onCheckout(cartProducts: CartProduct[]) {

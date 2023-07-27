@@ -1,6 +1,7 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, createSelector, on } from "@ngrx/store";
 import { Product } from "../../modules/shared/types/products.types";
 import { addProduct, addProductError, addProductSuccess, deleteProduct, deleteProductError, deleteProductSuccess, loadProduct, loadProductError, loadProductSuccess, loadProducts, loadProductsError, loadProductsSuccess, updateProduct, updateProductError, updateProductSuccess } from "./product.actions";
+import { AppState } from "../app.state";
 
 
 export interface ProductState {
@@ -16,6 +17,24 @@ const initialState: ProductState = {
     loading: true,
     error: undefined
 };
+
+export const selectProductState = (state: AppState) => state.products;
+
+export const selectAllProducts = createSelector(
+    selectProductState,
+    (state: ProductState) => state.products
+);
+
+export const selectProduct = createSelector(
+    selectProductState,
+    (state: ProductState) => state.selectedProduct
+);
+
+
+export const selectIsLoading = createSelector(
+    selectProductState,
+    (state: ProductState) => state.loading
+)
 
 export const productReducer = createReducer(
     initialState,

@@ -5,8 +5,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { addProduct, loadProduct, updateProduct } from 'src/app/state/product/product.actions';
-import { selectProduct } from 'src/app/state/product/product.selectors';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { selectProduct } from 'src/app/state/product/product.reducers';
 
 @UntilDestroy()
 @Component({

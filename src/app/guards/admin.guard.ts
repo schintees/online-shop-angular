@@ -2,8 +2,8 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { NavigationRoutes } from '../modules/shared/types/navigation.routes.enum';
 import { Store } from '@ngrx/store';
-import { selectIsAdmin } from '../modules/user/state/user.selectors';
 import { map } from 'rxjs';
+import { selectIsAdmin } from '../modules/user/state/user.reducers';
 
 export const adminGuard: CanActivateFn = () => {
   const store = inject(Store);

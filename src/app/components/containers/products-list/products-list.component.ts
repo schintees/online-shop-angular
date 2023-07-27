@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/shared/types/products.types';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { Store } from '@ngrx/store';
-import { selectAllProducts, selectIsLoading } from 'src/app/state/product/product.selectors';
 import { loadProducts } from 'src/app/state/product/product.actions';
 import { AppState } from 'src/app/state/app.state';
-import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.selectors';
+import { selectAllProducts, selectIsLoading } from 'src/app/state/product/product.reducers';
+import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.reducers';
 
 @Component({
   selector: 'app-products-list',
@@ -14,10 +14,10 @@ import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user
   styleUrls: []
 })
 export class ProductsListComponent implements OnInit {
-  products$: Observable<Product[]> = this.store.select(selectAllProducts);
-  isAdmin$: Observable<boolean | undefined> = this.store.select(selectIsAdmin);
-  isCustomer$: Observable<boolean | undefined> = this.store.select(selectIsCustomer);
-  isLoading$: Observable<boolean | undefined> = this.store.select(selectIsLoading);
+  products$: Observable<Product[]> | undefined;
+  isAdmin$: Observable<boolean | undefined> | undefined;
+  isCustomer$: Observable<boolean | undefined> | undefined;
+  isLoading$: Observable<boolean | undefined> | undefined;
 
   constructor(
     private store: Store<AppState>,
@@ -25,6 +25,11 @@ export class ProductsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.products$ = this.store.select(selectAllProducts);
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+    this.isCustomer$ = this.store.select(selectIsCustomer);
+    this.isLoading$ = this.store.select(selectIsLoading);
+
     this.store.dispatch(loadProducts())
   }
 
