@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/modules/shared/types/products.types';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/services/product.service';
-import { CartService } from 'src/app/modules/shopping-cart/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { Messages } from 'src/app/modules/shared/types/messages.const';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { AuthService } from 'src/app/modules/user/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import { loadProduct } from 'src/app/state/product/product.actions';
+import { addProductToCart } from 'src/app/modules/shopping-cart/state/cart.actions';
+import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.reducers';
+import { selectProduct } from 'src/app/state/product/product.reducers';
 
 @Component({
   selector: 'app-products-details',
@@ -17,29 +20,29 @@ import { AuthService } from 'src/app/modules/user/services/auth.service';
   styleUrls: []
 })
 export class ProductsDetailsComponent implements OnInit {
-  product$?: Observable<Product>;
-  isAdmin$?: Observable<boolean>;
-  isCustomer$?: Observable<boolean>;
-  
+  product$: Observable<Product | undefined> | undefined;
+  isAdmin$: Observable<boolean | undefined> | undefined;
+  isCustomer$: Observable<boolean | undefined> | undefined;
+
   constructor(
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private cartService: CartService,
+    private store: Store<AppState>,
     private snackBarService: SnackbarService,
     private navigationService: NavigationService,
-    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.isAdmin$ = this.authService.isAdmin();
-    this.isCustomer$ = this.authService.isCustomer();
+    this.product$ = this.store.select(selectProduct);
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+    this.isCustomer$ = this.store.select(selectIsCustomer);
+
     this.getProduct();
   }
 
   getProduct(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
-    this.product$ = this.productService.getProduct(id);
+    this.store.dispatch(loadProduct({ productId: id }));
   }
 
   onEdit(productId: string) {
@@ -54,7 +57,7 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   onAddToCart(product: Product) {
-    this.cartService.addProductToCart(product);
+    this.store.dispatch(addProductToCart({ product }))
     this.snackBarService.openSuccessMessageBar(Messages.cart.productAddedSuccessfully)
   }
 

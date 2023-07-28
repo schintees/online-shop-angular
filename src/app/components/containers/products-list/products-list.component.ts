@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/modules/shared/types/products.types';
-import { AuthService } from 'src/app/modules/user/services/auth.service';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { ProductService } from 'src/app/services/product.service';
+import { Store } from '@ngrx/store';
+import { loadProducts } from 'src/app/state/product/product.actions';
+import { AppState } from 'src/app/state/app.state';
+import { selectAllProducts, selectIsLoading } from 'src/app/state/product/product.reducers';
+import { selectIsAdmin, selectIsCustomer } from 'src/app/modules/user/state/user.reducers';
 
 @Component({
   selector: 'app-products-list',
@@ -11,24 +14,23 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: []
 })
 export class ProductsListComponent implements OnInit {
-  products$?: Observable<Product[]>;
-  isAdmin$?: Observable<boolean>;
-  isCustomer$?: Observable<boolean>;
+  products$: Observable<Product[]> | undefined;
+  isAdmin$: Observable<boolean | undefined> | undefined;
+  isCustomer$: Observable<boolean | undefined> | undefined;
+  isLoading$: Observable<boolean | undefined> | undefined;
 
   constructor(
+    private store: Store<AppState>,
     private navigationService: NavigationService,
-    private productService: ProductService,
-    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.getProducts();
-  }
+    this.products$ = this.store.select(selectAllProducts);
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+    this.isCustomer$ = this.store.select(selectIsCustomer);
+    this.isLoading$ = this.store.select(selectIsLoading);
 
-  getProducts() {
-    this.isAdmin$ = this.authService.isAdmin();
-    this.isCustomer$ = this.authService.isCustomer();
-    this.products$ = this.productService.getAllProducts();
+    this.store.dispatch(loadProducts())
   }
 
   onClickCart() {

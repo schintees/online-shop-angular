@@ -1,7 +1,9 @@
-<app-shopping-cart-details-view
-  [cartProducts]="cartProducts"
-  (onDeleteFromCart)="onDeleteFromCart($event)"
-  (onCheckout)="onCheckout()"
-  (onQuantityIncrease)="onQuantityIncrease($event)"
-  (onQuantityDecrease)="onQuantityDecrease($event)"
-></app-shopping-cart-details-view>
+<div *ngIf="cartProducts$ | async as cartProducts">
+  <app-shopping-cart-details-view
+    [cartProducts]="cartProducts"
+    (onDeleteFromCart)="onDeleteFromCart($event)"
+    (onCheckout)="onCheckout(cartProducts)"
+    (onQuantityIncrease)="onQuantityIncrease($event)"
+    (onQuantityDecrease)="onQuantityDecrease($event)"
+  ></app-shopping-cart-details-view>
+</div>
