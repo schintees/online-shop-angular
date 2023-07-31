@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, exhaustMap, map, mergeMap, of, tap } from "rxjs";
+import { catchError, exhaustMap, map, of, tap } from "rxjs";
 import { ProductService } from "src/app/services/product.service";
 import { addProduct, addProductError, addProductSuccess, deleteProduct, deleteProductError, deleteProductSuccess, loadProduct, loadProductError, loadProductSuccess, loadProducts, loadProductsError, loadProductsSuccess, updateProduct, updateProductError, updateProductSuccess } from "./product.actions";
 import { NavigationService } from "src/app/services/navigation.service";
 import { SnackbarService } from "src/app/services/snackbar.service";
-import { Messages } from "../../modules/shared/types/messages.const";
+import { SnackbarMessages } from "../../modules/shared/types/snackbar-messages.enum";
 import { MatDialog } from "@angular/material/dialog";
 
 @Injectable()
@@ -59,7 +59,7 @@ export class ProductEffects {
         this.actions$.pipe(
             ofType(addProductSuccess),
             tap(() => {
-                this.snackBarService.openSuccessMessageBar(Messages.product.createdSuccessfully);
+                this.snackBarService.openSuccessMessageBar(SnackbarMessages.productCreatedSuccessfully);
                 this.navigationService.navigateToProductsPage()
             })
         ), { dispatch: false }
@@ -82,7 +82,7 @@ export class ProductEffects {
         this.actions$.pipe(
             ofType(updateProductSuccess),
             tap(() => {
-                this.snackBarService.openSuccessMessageBar(Messages.product.updatedSuccessfully);
+                this.snackBarService.openSuccessMessageBar(SnackbarMessages.productUpdatedSuccessfully);
                 this.navigationService.navigateToProductsPage()
             })
         ), { dispatch: false }
@@ -106,7 +106,7 @@ export class ProductEffects {
             tap(() => {
                 this.matDialod.closeAll();
                 this.navigationService.navigateToProductsPage();
-                this.snackBarService.openSuccessMessageBar(Messages.product.deletedSuccessfully);
+                this.snackBarService.openSuccessMessageBar(SnackbarMessages.productDeletedSuccessfully);
             })
         ), { dispatch: false }
     );

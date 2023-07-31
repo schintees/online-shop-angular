@@ -5,7 +5,7 @@ import { SnackbarService } from "src/app/services/snackbar.service";
 import { login, loginError, loginSuccess, logout } from "./user.actions";
 import { catchError, exhaustMap, map, of, tap } from "rxjs";
 import { NavigationService } from "src/app/services/navigation.service";
-import { Messages } from "../../shared/types/messages.const";
+import { SnackbarMessages } from "../../shared/types/snackbar-messages.enum";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
@@ -46,9 +46,9 @@ export class UserEffects {
             tap(({ error }) => {
                 const httpError: HttpErrorResponse = JSON.parse(error);
                 if (httpError && httpError.error && httpError.error.message) {
-                    this.snackBarService.openErrorMessageBar(Messages.login.wrongCredentials)
+                    this.snackBarService.openErrorMessageBar(SnackbarMessages.wrongCredentials)
                 } else {
-                    this.snackBarService.openErrorMessageBar(Messages.login.serverError);
+                    this.snackBarService.openErrorMessageBar(SnackbarMessages.serverError);
                 }
             })
         ), { dispatch: false }

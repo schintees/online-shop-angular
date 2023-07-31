@@ -1,85 +1,101 @@
 <mat-card>
-  <mat-card-title>{{ isAddMode ? "Create" : "Edit" }} product</mat-card-title>
+  <mat-card-title i18n *ngIf="isAddMode">Create product</mat-card-title>
+  <mat-card-title i18n *ngIf="!isAddMode">Edit product</mat-card-title>
   <mat-card-content>
     <form [formGroup]="productForm">
       <mat-form-field>
-        <mat-label>Name:</mat-label>
-        <input matInput placeholder="Product name" formControlName="name" />
-        <mat-error *ngIf="hasError('name', 'required')"
+        <mat-label i18n>Name</mat-label>
+        <input
+          i18n-placeholder
+          matInput
+          placeholder="Product name"
+          formControlName="name"
+        />
+        <mat-error i18n *ngIf="hasError('name', 'required')"
           >Name is required</mat-error
         >
-        <mat-error *ngIf="hasError('name', 'minlength')"
+        <mat-error i18n *ngIf="hasError('name', 'minlength')"
           >Name is too short</mat-error
         >
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Category:</mat-label>
+        <mat-label i18n>Category</mat-label>
         <input
+          i18n-placeholder
           matInput
           placeholder="Product category"
           formControlName="category"
         />
-        <mat-error *ngIf="hasError('category', 'required')"
+        <mat-error i18n *ngIf="hasError('category', 'required')"
           >Category is required</mat-error
         >
-        <mat-error *ngIf="hasError('category', 'minlength')"
+        <mat-error i18n *ngIf="hasError('category', 'minlength')"
           >Category is too short</mat-error
         >
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Image:</mat-label>
-        <input matInput placeholder="Product image" formControlName="image" />
-        <mat-error *ngIf="hasError('image', 'required')"
-          >Image is required</mat-error
+        <mat-label i18n>Image URL</mat-label>
+        <input
+          i18n-placeholder
+          matInput
+          placeholder="Product image"
+          formControlName="image"
+        />
+        <mat-error i18n *ngIf="hasError('image', 'required')"
+          >Image URL is required</mat-error
         >
-        <mat-error *ngIf="hasError('image', 'minlength')"
-          >Image is too short</mat-error
+        <mat-error i18n *ngIf="hasError('image', 'minlength')"
+          >Image URL is too short</mat-error
         >
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Price:</mat-label>
+        <mat-label i18n>Price</mat-label>
         <input
+          i18n-placeholder
           type="number"
           matInput
           placeholder="Product price"
           formControlName="price"
         />
-        <mat-error *ngIf="hasError('price', 'required')"
+        <mat-error i18n *ngIf="hasError('price', 'required')"
           >Price is required</mat-error
         >
-        <mat-error *ngIf="hasError('price', 'min')">Price is too low</mat-error>
+        <mat-error i18n *ngIf="hasError('price', 'min')"
+          >Price is too low</mat-error
+        >
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Description:</mat-label>
+        <mat-label i18n>Description</mat-label>
         <input
+          i18n-placeholder
           matInput
           placeholder="Product description"
           formControlName="description"
         />
-        <mat-error *ngIf="hasError('description', 'required')"
+        <mat-error i18n *ngIf="hasError('description', 'required')"
           >Description is required</mat-error
         >
-        <mat-error *ngIf="hasError('description', 'minlength')"
+        <mat-error i18n *ngIf="hasError('description', 'minlength')"
           >Description is too short</mat-error
         >
       </mat-form-field>
 
       <div class="button">
-        <button mat-raised-button color="gray" (click)="onCancel.emit()">
-          Cancel
-        </button>
+        <button i18n mat-raised-button color="gray" (click)="onCancel.emit()"
+          >Cancel</button
+        >
         <button
+          i18n
           mat-raised-button
           color="primary"
           (click)="onSubmit.emit()"
           [disabled]="!productForm.valid"
+          >Submit</button
         >
-          Submit
-        </button>
       </div>
     </form>
   </mat-card-content>
