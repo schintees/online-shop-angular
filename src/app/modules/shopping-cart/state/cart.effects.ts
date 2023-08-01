@@ -4,7 +4,7 @@ import { createOrder, createOrderError, createOrderSuccess } from "./cart.action
 import { catchError, exhaustMap, map, of, tap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { SnackbarService } from "src/app/services/snackbar.service";
-import { Messages } from "../../shared/types/messages.const";
+import { SnackbarMessages } from "../../shared/types/snackbar-messages.enum";
 
 @Injectable()
 export class ShoppingCartEffects {
@@ -31,7 +31,7 @@ export class ShoppingCartEffects {
         this.actions$.pipe(
             ofType(createOrderSuccess),
             tap(() => {
-                this.snackBarService.openSuccessMessageBar(Messages.cart.orderCreatedSuccessfully)
+                this.snackBarService.openSuccessMessageBar(SnackbarMessages.orderCreatedSuccessfully)
             })
         ), { dispatch: false }
     );

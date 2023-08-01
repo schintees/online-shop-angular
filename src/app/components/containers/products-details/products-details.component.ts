@@ -5,7 +5,7 @@ import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-d
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { Messages } from 'src/app/modules/shared/types/messages.const';
+import { SnackbarMessages } from 'src/app/modules/shared/types/snackbar-messages.enum';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
@@ -58,7 +58,7 @@ export class ProductsDetailsComponent implements OnInit {
 
   onAddToCart(product: Product) {
     this.store.dispatch(addProductToCart({ product }))
-    this.snackBarService.openSuccessMessageBar(Messages.cart.productAddedSuccessfully)
+    this.snackBarService.openSuccessMessageBar(SnackbarMessages.productAddedToCartSuccessfully)
   }
 
 }

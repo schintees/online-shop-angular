@@ -1,15 +1,15 @@
 <div class="content-header">
-  <h1>Shopping Cart</h1>
+  <h1 i18n>Shopping Cart</h1>
   <div class="header-actions">
-    <button mat-flat-button color="primary" (click)="onCheckout.emit()">
-      CHECKOUT
-    </button>
+    <button i18n mat-flat-button color="primary" (click)="onCheckout.emit()"
+      >CHECKOUT</button
+    >
   </div>
 </div>
 <table mat-table [dataSource]="cartProducts" class="mat-elevation-z8">
   <!-- Category Column -->
   <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <th i18n mat-header-cell *matHeaderCellDef>Category</th>
     <td mat-cell *matCellDef="let cartProduct">
       {{ cartProduct.product.category }}
     </td>
@@ -17,7 +17,7 @@
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Product Name</th>
+    <th i18n mat-header-cell *matHeaderCellDef>Product name</th>
     <td mat-cell *matCellDef="let cartProduct">
       {{ cartProduct.product.name }}
     </td>
@@ -25,7 +25,7 @@
 
   <!-- Price Column -->
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <th i18n mat-header-cell *matHeaderCellDef>Price</th>
     <td mat-cell *matCellDef="let cartProduct">
       {{ cartProduct.product.price }}
     </td>
@@ -33,7 +33,7 @@
 
   <!-- Quantity Column -->
   <ng-container matColumnDef="quantity">
-    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+    <th i18n mat-header-cell *matHeaderCellDef>Quantity</th>
     <td mat-cell *matCellDef="let cartProduct">
       <app-icon-button
         [type]="'arrow_upward'"

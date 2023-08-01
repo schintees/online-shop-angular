@@ -1,6 +1,6 @@
 <div *ngIf="product">
   <div class="content-header">
-    <h1>Product: {{ product.name }}</h1>
+    <h1 i18n>Product: {{ product.name }}</h1>
     <div class="header-actions">
       <app-icon-button
         *ngIf="isCustomer"
@@ -25,19 +25,19 @@
   <div class="product-content">
     <table>
       <tr>
-        <td>Name</td>
+        <td i18n>Name</td>
         <td>{{ product.name }}</td>
       </tr>
       <tr>
-        <td>Category</td>
+        <td i18n>Category</td>
         <td>{{ product.category }}</td>
       </tr>
       <tr>
-        <td>Price</td>
-        <td>{{ product.price }} RON</td>
+        <td i18n>Price</td>
+        <td i18n>{{ product.price }} EUR</td>
       </tr>
       <tr>
-        <td>Description</td>
+        <td i18n>Description</td>
         <td>{{ product.description }}</td>
       </tr>
     </table>

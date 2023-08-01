@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartProduct } from '../../../types/cart.products.types';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { Messages } from 'src/app/modules/shared/types/messages.const';
+import { SnackbarMessages } from 'src/app/modules/shared/types/snackbar-messages.enum';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { createOrder, decreaseProductQuantity, increaseProductQuantity, removeProductFromCart } from '../../../state/cart.actions';
@@ -28,7 +28,7 @@ export class ShoppingCartDetailsComponent implements OnInit {
 
   onCheckout(cartProducts: CartProduct[]) {
     if (cartProducts.length === 0) {
-      this.snackBarService.openErrorMessageBar(Messages.cart.empty)
+      this.snackBarService.openErrorMessageBar(SnackbarMessages.emptyCart)
     } else {
       this.store.dispatch(createOrder({ cartProducts }))
     }
