@@ -1,12 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsDetailsComponent } from './products-details.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Product } from 'src/app/modules/shared/types/products.types';
 import { ProductsDetailsViewComponent } from '../../presentational/products-details-view/products-details-view.component';
+import { loadProduct } from 'src/app/state/product/product.actions';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { addProductToCart } from 'src/app/modules/shopping-cart/state/cart.actions';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarMessages } from 'src/app/modules/shared/types/snackbar-messages.enum';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 describe('ProductsDetailsComponent', () => {
   let component: ProductsDetailsComponent;
@@ -30,7 +36,17 @@ describe('ProductsDetailsComponent', () => {
     },
   };
 
+  let store: MockStore;
+  let dispatchSpy: jasmine.Spy;
+  let snackbarServiceSpy: jasmine.SpyObj<SnackbarService>;
+  let navigationServiceSpy: jasmine.SpyObj<NavigationService>;
+  let dialogSpy: jasmine.SpyObj<MatDialog>;
+
   beforeEach(() => {
+    snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['openSuccessMessageBar'])
+    navigationServiceSpy = jasmine.createSpyObj('NavigationService', ['navigateToEditProductPage'])
+    dialogSpy = jasmine.createSpyObj('MatDialog', ['open'])
+
     TestBed.configureTestingModule({
       declarations: [
         ProductsDetailsComponent,
@@ -43,15 +59,46 @@ describe('ProductsDetailsComponent', () => {
       ],
       providers: [
         provideMockStore({ initialState }),
+        { provide: SnackbarService, useValue: snackbarServiceSpy },
+        { provide: NavigationService, useValue: navigationServiceSpy },
+        { provide: MatDialog, useValue: dialogSpy },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: convertToParamMap({
+                id: product.id
+              })
+            }
+          }
+        }
       ]
     });
+    store = TestBed.inject(MockStore);
+    dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
     fixture = TestBed.createComponent(ProductsDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should dispatch loadProduct when init', () => {
+    expect(dispatchSpy).toHaveBeenCalledWith(loadProduct({ productId: product.id }));
+  });
+
+  it('should dispatch addProductToCart when onAddToCart', () => {
+    component.onAddToCart(product);
+    expect(dispatchSpy).toHaveBeenCalledWith(addProductToCart({ product }));
+    expect(snackbarServiceSpy.openSuccessMessageBar).toHaveBeenCalledOnceWith(SnackbarMessages.productAddedToCartSuccessfully);
+  });
+
+  it('should navigate to edit product page when onEdit', () => {
+    component.onEdit(product.id);
+    expect(navigationServiceSpy.navigateToEditProductPage).toHaveBeenCalledOnceWith(product.id);
+  });
+
+  it('should open dialog when onDelete', () => {
+    component.onDelete(product.id, product.name);
+    expect(dialogSpy.open).toHaveBeenCalledTimes(1);
   });
 
   it('should display product name in title', () => {
