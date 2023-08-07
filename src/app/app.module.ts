@@ -9,7 +9,6 @@ import { ProductsListComponent } from './components/containers/products-list/pro
 import { ProductsListViewComponent } from './components/presentational/products-list-view/products-list-view.component';
 import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconButtonComponent } from "./modules/shared/components/presentational/icon-button/icon-button.component";
 import { ConfirmDeleteDialogViewComponent } from './components/presentational/confirm-delete-dialog-view/confirm-delete-dialog-view.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +30,7 @@ import { appEffects } from './state/app.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table'
 import { environment } from 'src/environments/environment';
+import { IconButtonComponent } from 'ui-components'
 
 let devModules = [
     StoreDevtoolsModule.instrument(),

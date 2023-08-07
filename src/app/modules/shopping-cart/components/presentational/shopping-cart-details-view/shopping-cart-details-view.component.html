@@ -35,17 +35,17 @@
   <ng-container matColumnDef="quantity">
     <th i18n mat-header-cell *matHeaderCellDef>Quantity</th>
     <td mat-cell *matCellDef="let cartProduct">
-      <app-icon-button
+      <lib-icon-button
         [type]="'arrow_upward'"
         [color]="'primary'"
         (onClick)="onQuantityIncrease.emit(cartProduct.product.id)"
-      ></app-icon-button>
+      ></lib-icon-button>
       {{ cartProduct.quantity }}
-      <app-icon-button
+      <lib-icon-button
         [type]="'arrow_downward'"
         [color]="'primary'"
         (onClick)="onQuantityDecrease.emit(cartProduct.product.id)"
-      ></app-icon-button>
+      ></lib-icon-button>
     </td>
   </ng-container>
 
@@ -53,11 +53,11 @@
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let cartProduct">
-      <app-icon-button
+      <lib-icon-button
         [type]="'close'"
         [color]="'warn'"
         (onClick)="onDeleteFromCart.emit(cartProduct.product.id)"
-      ></app-icon-button>
+      ></lib-icon-button>
     </td>
   </ng-container>
 
