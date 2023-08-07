@@ -46,7 +46,7 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   onEdit(productId: string) {
-    this.navigationService.navigateToEditProducttPage(productId);
+    this.navigationService.navigateToEditProductPage(productId);
   }
 
   onDelete(productId: string, productName: string) {
