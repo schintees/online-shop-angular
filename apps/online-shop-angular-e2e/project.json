@@ -1,0 +1,44 @@
+{
+  "name": "online-shop-angular-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/online-shop-angular-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "devServerTarget": "online-shop-angular:serve",
+        "watch": true,
+        "headless": false,
+        "cypressConfig": "apps/online-shop-angular-e2e/cypress.config.ts"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "online-shop-angular:serve:production"
+        }
+      }
+    },
+    "cypress-run": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "devServerTarget": "online-shop-angular:serve",
+        "cypressConfig": "apps/online-shop-angular-e2e/cypress.config.ts"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "online-shop-angular:serve:production"
+        }
+      }
+    },
+    "cypress-open": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "watch": true,
+        "headless": false,
+        "cypressConfig": "apps/online-shop-angular-e2e/cypress.config.ts"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["online-shop-angular"]
+}
