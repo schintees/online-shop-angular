@@ -1,0 +1,16 @@
+@use "../../../../styles/mixins.scss" as mixins;
+
+@include mixins.content-header-with-actions;
+
+.product-content {
+  display: flex;
+  align-items: center;
+
+  td {
+    &:first-child {
+      color: grey;
+      text-align: right;
+    }
+    padding: 12px 20px 12px;
+  }
+}
