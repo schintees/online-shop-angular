@@ -4,18 +4,18 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
   <div class="header-actions">
-    <app-icon-button
+    <lib-icon-button
       *ngIf="isCustomer"
       [type]="'shopping_cart'"
       [color]="'primary'"
       (onClick)="onClickCart.emit()"
-    ></app-icon-button>
-    <app-icon-button
+    ></lib-icon-button>
+    <lib-icon-button
       *ngIf="isAdmin"
       [type]="'add'"
       [color]="'primary'"
       (onClick)="onCreateProduct.emit()"
-    ></app-icon-button>
+    ></lib-icon-button>
   </div>
 </div>
 
@@ -42,11 +42,11 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let product">
-      <app-icon-button
+      <lib-icon-button
         [type]="'keyboard_arrow_right'"
         [color]="'accent'"
         (onClick)="onProductClick.emit(product.id)"
-      ></app-icon-button>
+      ></lib-icon-button>
     </td>
   </ng-container>
 
